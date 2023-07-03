@@ -45,16 +45,9 @@ namespace  EnemyManager
 		this->residentResource.push_back(EnemyShot00::Resource::Create());
 
 		//šƒ^ƒXƒN‚Ì¶¬
-#if false
-		auto boss = EnemyBoss::Object::Create(true);
-
-		boss->pos = ML::Vec2(480.0f, 200.0f);
-		boss->mode = EnemyBoss::Object::MoveMode::Pattern3;
-#else
-		//this->AppearEnemy(10);
 		this->ModeMap_Initialize();
 		this->mode = Mode::AppearNormalEnemy;
-#endif
+
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -81,29 +74,9 @@ namespace  EnemyManager
 	void  Object::UpDate()
 	{
 		if (ge->GameStartFlag) { return; }
-#if true
+
 		this->ModeMap_UpDate(this->mode);
 
-#else
-		if (!this->isAppearBoss) {
-			if (ge->score > 100) {
-				this->AppearEnemy(10);
-				this->isAppearBoss = true;
-			}
-			else {
-				this->appearCnt = (this->appearCnt + 1) % 60;
-			}
-#if true
-			if (this->appearCnt % 10 == 0) {
-				this->AppearEnemy(0);
-			}
-			if (this->appearCnt % 30 == 0) {
-				this->AppearEnemy(1);
-			}
-#endif
-		}
-
-#endif
 	}
 	//-------------------------------------------------------------------
 	//u‚Q‚c•`‰æv‚PƒtƒŒ[ƒ€–ˆ‚És‚¤ˆ—
@@ -165,14 +138,14 @@ namespace  EnemyManager
 		else {
 			this->appearCnt = (this->appearCnt + 1) % 60;
 		}
-#if true
+
 		if (this->appearCnt % 10 == 0) {
 			this->AppearEnemy(0);
 		}
 		if (this->appearCnt % 30 == 0) {
 			this->AppearEnemy(1);
 		}
-#endif
+
 	}
 	void Object::CoolTimeUpToBoss_UpDate() {
 		this->appearCnt = (this->appearCnt + 1) % 150;
